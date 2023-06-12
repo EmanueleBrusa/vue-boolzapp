@@ -3,3 +3,30 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+body {
+    background: linear-gradient(180deg, #009688 15%, #D9DBD4 15%);
+    height: 100vh;
+    position: relative;
+}
+
+.container{
+    max-width: 80%;
+    margin: 0 auto;
+    height: 90vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: blue;
+}
+
+.col-4{
+    height: 90vh;
+    background-color: brown;
+}
+  
+.col-8{
+    height: 90vh;
+    background-color: rgb(57, 117, 7);
+}
