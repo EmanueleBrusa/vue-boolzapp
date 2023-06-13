@@ -25,6 +25,7 @@ i, input, .avatar-profile{
 }
 /* sezione contatti */
 .avatar-section{
+    width: 550px;
     display: flex;
     flex-direction: column;
 }

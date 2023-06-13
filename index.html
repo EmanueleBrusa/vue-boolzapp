@@ -44,11 +44,17 @@
             <!-- lista contatti -->
             <div class="col-12 users">
                 <div class="contact" v-for="(contact,index) in contacts" @click="selectContact(index)" :class="contact.visible ? 'show': 'hide'">
-                    <div class="col-12 col-md avatar-profile my-3 ms-lg-2 d-flex justify-content-center justify-content-lg-start align-items-center">
+                    <div class="col-12 col-md avatar-profile my-3 ms-lg-2 d-flex justify-content-lg-start">
                         <img :src="contacts[index].avatar" alt="">
                         <span class="ms-2 d-none d-lg-inline ">
                             {{contacts[index].name}}
                         </span>
+                        <div class="lastMessage">
+                            Ultimo messaggio inviato
+                        </div>
+                    </div>
+                    <div class="time">
+                        12:00
                     </div>
                 </div>
               
