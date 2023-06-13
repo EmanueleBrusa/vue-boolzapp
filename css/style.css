@@ -13,7 +13,7 @@ body{
 }
 /* contenitore dell'app */
 .app-container{
-    width: 80%;
+    width: 78%;
     min-width: 500px;
     height: 95vh;
     background-color: white;
@@ -30,18 +30,30 @@ i, input, .avatar-profile{
     flex-direction: column;
 }
 
-.my-avatar, .notification{
+.my-avatar{
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+.chat-contact{
+    font-size: 22px;
+}
+
 .my-avatar{
     background-color: #EAEAEA;
+    border-right: 2px solid rgb(216, 216, 216);
+    font-weight: 600;
 }
 
 .avatar-icons, .chat-contact{
     color: #B1B1B1;
+}
+
+.avatar-icons{
+    gap: 10px;
+    margin-right: 20px;
+    font-size: 22px;
 }
 
 .notification{
@@ -54,16 +66,28 @@ i, input, .avatar-profile{
     background-color: #F2FBFF;
     border-radius: 50%;
     text-align: center;
-    padding: 7px 0;
-    width: 2rem;
-    height: 2rem;
+    padding: 10px 0;
+    width: 3rem;
+    height: 3rem;
 }
 
+.fa-solid{
+    font-size: 25px;
+}
 
+.notification-messages span{
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.notification-messages a{
+    color: gray;
+    font-size: 13px;
+}
 
 .avatar-profile img{
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
 }
 
@@ -74,9 +98,14 @@ i, input, .avatar-profile{
 }
 /* input ricerca */
 .searchbar{
-    width: 95%;
-    margin: 3px auto;
+    width: 97%;
+    margin: 8px auto;
 }
+
+#search-background{
+    background-color: rgba(235, 232, 232, 0.726);
+}
+
 .has-search .form-control {
     padding-left: 2.375rem;
 }
@@ -108,7 +137,6 @@ i, input, .avatar-profile{
 .message-section{
     background-image: url(../img/mine.jpg);
     position: relative;
-    /* height: 100%; */
 }
 
 /* chat */
@@ -154,3 +182,42 @@ i, input, .avatar-profile{
 .msg:hover .dropdown-arrow{
     display: inline;
 }
+
+.time, .lastMessage {
+    font-size: 11px;
+    color: rgb(177, 177, 177);
+}
+
+.time {
+    font-size: 10px;
+    text-align-last: right;
+}
+
+/*test*/
+
+.profileImg,
+.name {
+display: flex;
+align-items: center;
+}
+
+.time {
+margin-left: auto;
+margin-right: 25px;
+}
+
+.name-time {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px;
+}
+
+.accesso-chat{
+    font-size: 11px;
+    color: rgb(177, 177, 177);
+}
+.name{
+    font-weight: 500;
+}
+
