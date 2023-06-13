@@ -3,83 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Boolzapp</title>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-
-    <!--inizio main-->
-    <main>
-        
-        <div id="app">
-            <!--inizio contenitore-->
-            <div class="container p-0">
-                <!--riga unica per inserimento delle due macrocolonne-->
-                <div class="row p-0 m-0">
-                    <!--inzio sezione colonna sx-->
-                    <div class="col-4 p-0">
-                        <!--sezione profilo utente-->
-                        <div class="avatar">
-                            <!--nome e immagine-->
-                            <div class="sx-section-avatar">
-                                <img src="img/avatar_io.jpg" alt="">
-                                <h6><strong>Sofia</strong></h6>
-                            </div>
-                            <!--icone-->
-                            <div class="icon">
-                                <i class="fa-solid fa-circle-notch fa-xl"></i>
-                                <i class="fa-solid fa-message fa-xl"></i>
-                                <i class="fa-solid fa-ellipsis-vertical fa-xl"></i>
-                            </div>
-                        </div>
-                        <!--sezione notifiche-->
-                        <div class="notifications">
-                            <div class="icon rounded-circle">
-                                <i class="fa-solid fa-bell-slash fa-xl"></i>
-                            </div>
-                            <div >
-                                <h6>Ricevi notifiche di nuovi messaggi</h6>
-                                <a href="#">Attiva notifiche desktop</a>
-                            </div>
-                        </div>
-                        <!--sezione ricerca-->
-                        <div class="search">
-                                <div class="form-group has-search p-1">
-                                    <span class="fa fa-search form-control-feedback"></span>
-                                    <input type="text" class="form-control" placeholder="Cerca o inizia una nuova chat">
-                                </div>
-                        </div>
-                        <!--sezione chat-->
-                        <div class="chat-list">
-                            
-                        </div>
-                    </div>
-                    <!--fine sezione colonna sx-->
-                    <!--inizio sezione chat-->
-                    <div class="col-8 p-0">
-                        <div class="chat-header">
-                            
-                        </div>
-                        <div class="message-list">
-                             
-                        </div>
-                        <div class="chat-footer">
-                            
-                        </div>
-                    </div>
-                    <!--fine sezione chat-->
+    <div class="app-container" id="app">
+        <!-- sezione SINISTRA contatti -->
+        <div class="col-2 col-lg-auto avatar-section">
+            <!-- sezione il mio profilo -->
+            <div class="col-12 my-avatar ps-1 py-1">
+                <div class="col-12 col-md avatar-profile d-flex justify-content-center justify-content-lg-start ">
+                    <img src="./img/avatar_io.jpg" alt="">
+                    <span class="ps-3 d-none d-lg-flex align-items-center">Sofia</span>
                 </div>
-                <!--fine riga-->
+                <div class="col-4 pe-2 avatar-icons d-none d-lg-flex justify-content-end">
+                    <i class="fas fa-circle-notch"></i>
+                    <i class="fas fa-message mx-2"></i>
+                    <i class="fas fa-ellipsis-vertical"></i>
+                </div>
             </div>
-            <!--fine contenitore-->
+            <!-- sezione messaggio notifiche -->
+            <div class="col-12 notification d-flex justify-content-center">
+                <div class="notification-icon  ms-0 ms-md-2 col-12 col-md-2">
+                    <i class="fa-solid fa-bell-slash" style="color: #8EDAFC;"></i>
+                </div>
+                <div class="notification-messages col-10 d-none d-lg-block ps-2">
+                    <span>Ricevi notifiche di nuovi messaggi</span>
+                    <br>
+                    <a href="#">Attiva notifiche desktop</a>
+                </div>
+            </div>
+            <!-- input ricerca -->
+            <div class="col-12 form-group has-search d-flex searchbar">
+                <span class="fa fa-search form-control-feedback"></span>
+                <input  v-model="searched_name" @input="searchContact" type="text" class="form-control" placeholder="Search">
+            </div>
+          
+            <!-- lista contatti -->
+            <div class="col-12 users">
+                <div class="contact" v-for="(contact,index) in contacts" @click="selectContact(index)" :class="contact.visible ? 'show': 'hide'">
+                    <div class="col-12 col-md avatar-profile my-3 ms-lg-2 d-flex justify-content-center justify-content-lg-start align-items-center">
+                        <img :src="contacts[index].avatar" alt="">
+                        <span class="ms-2 d-none d-lg-inline ">
+                            {{contacts[index].name}}
+                        </span>
+                    </div>
+                </div>
+              
+                
+            </div>
         </div>
-
-    </main>
-    <!--fine main-->
-
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script type="text/javascript" src="./js/script.js"></script>
+        <!-- sezione DESTRA per la chat -->
+        <div class="col message-section">
+            <!-- contatto della chat -->
+            <div class="col-12 my-avatar ps-2  py-1">
+                <div class="col-11 col-md avatar-profile">
+                    <img :src="contacts[activeContact].avatar" alt="">
+                    <span class="ps-3">
+                        {{contacts[activeContact].name}}
+                    </span>
+                    <span>
+                        {{contacts[activeContact].messages.date}}
+                    </span>
+                </div>
+                <!-- icone contatto -->
+                <div class="col-4 d-flex justify-content-md-end me-4 chat-contact">
+                    <i class="fas fa-magnifying-glass d-none d-md-block"></i>
+                    <i class="fas fa-paperclip mx-3 d-none d-md-block"></i>
+                    <i class="fas fa-ellipsis-vertical me-5 me-md-0 "></i>
+                </div>
+            </div>
+            <!-- sezione messaggi -->
+            <div class="chat-section">
+                <div v-for="(message, index) in contacts[activeContact].messages" class="col-12 d-flex msg" :class="contacts[activeContact].messages[index].status === 'received' ? '': 'justify-content-end'">
+                    <div :class="contacts[activeContact].messages[index].status === 'received' ? 'received-msg':'sent-msg'">
+                        <span class="text" >
+                            {{contacts[activeContact].messages[index].message}}
+                        </span>
+                        <span class="data-msg">
+                            {{contacts[activeContact].messages[index].date.slice(10,16)}}
+                        </span>
+                        <i class="hover fas fa-angle-down dropdown-arrow" data-toggle="dropdown" @click="dropDown(index)"></i>
+                        <div class="dropdown-menu" :class="contacts[activeContact].messages[index].dropdown ? 'show' : ''" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Contatto</a>
+                            <a class="dropdown-item" href="#" @click="deleteMessage(index)">Cancella il messaggio</a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- input messaggio -->
+            <div class="input-message d-flex  justify-content-between align-items-center pt-2">
+                <i class="fa-regular fa-face-smile ms-2" style="color: #6A7171"></i>
+                <input  @keyup.enter="newMessage" v-model="new_msg" type="text" placeholder="scrivi un messaggio" class="form-control py-1 ps-2 rounded border col mx-2">
+                <i class="fas fa-microphone col-auto me-2" style="color: #6A7171"></i>
+            </div>
+        </div>
+    </div>
 </body>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="./js/script.js"></script>
 </html>
