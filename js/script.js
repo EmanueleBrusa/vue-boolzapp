@@ -232,10 +232,15 @@ createApp({
         addDropdown(){
             this.contacts[this.activeContact].messages.push({dropdown : false})
         },
-        dropDown(index){
-            this.contacts[this.activeContact].messages[index].dropdown = !this.contacts[this.activeContact].messages[index].dropdown
-            console.log(this.contacts[this.activeContact].messages.dropdown)    
-         },
+        dropDown(index) {
+            this.contacts[this.activeContact].messages.forEach((message, i) => {
+              if (i === index) {
+                message.dropdown = !message.dropdown;
+              } else {
+                message.dropdown = false;
+              }
+            });
+        },
         //funzione per cancellare il messaggio
         deleteMessage(messageIndex){
             this.contacts[this.activeContact].messages.splice(messageIndex, 1);
