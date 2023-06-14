@@ -193,12 +193,16 @@ createApp({
             new_msg:'',
             response_obj: '',
             searched_name:'',
-            isRecording: false,
+            isTyping: false,
         };
         
     }, 
     
     methods: {
+
+        handleTyping() {
+            this.isTyping = true;
+        },
         
         //funzione che determina l'utente attivo
         selectContact(index){
@@ -209,13 +213,9 @@ createApp({
         //funzione per inviare un nuovo messaggio e setTimeout per risposta automatica
         newMessage() {
             if (this.new_msg.trim() !== '') {
-                // Inizio registrazione
-                if (!this.isRecording) {
-                    this.isRecording = true;
-                    return;
-                }
-              
-                // Fine registrazione
+               
+                this.isTyping = false; // Imposta isTyping a false quando viene inviato un messaggio
+
                 let obj = {
                     date: '',
                     message: this.new_msg,
@@ -233,7 +233,7 @@ createApp({
                     };
                     this.contacts[this.activeContact].messages.push(obj);
                 }, 1000);
-                this.isRecording = false;
+                
             }
         },
 
