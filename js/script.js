@@ -208,23 +208,26 @@ createApp({
         },
         
         //funzione per inviare un nuovo messaggio e setTimeout per risposta automatica
-        newMessage(){
-            let obj = {
+        newMessage() {
+            if (this.new_msg.trim() !== '') {
+              let obj = {
                 date: '',
                 message: this.new_msg,
-                status:'sent'
+                status: 'sent'
+              };
+          
+              this.contacts[this.activeContact].messages.push(obj);
+              this.new_msg = '';
+          
+              setTimeout(() => {
+                obj = {
+                  date: '',
+                  message: 'ok',
+                  status: 'received'
+                };
+                this.contacts[this.activeContact].messages.push(obj);
+              }, 1000);
             }
-            
-            this.contacts[this.activeContact].messages.push(obj)
-            this.new_msg=''
-            setTimeout(()=>{
-              obj = {
-                    date: '',
-                    message: 'ok',
-                    status:'received'
-                }
-                this.contacts[this.activeContact].messages.push(obj)
-            },1000)
         },
 
         //funzione per il dropdown
