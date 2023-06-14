@@ -259,10 +259,10 @@ createApp({
         searchContact(){
             let nameSearched = this.searched_name.toLowerCase(); 
             this.contacts.forEach((contact) => {
-            let contactName = contact.name.toLowerCase();
-            contact.visible = contactName.includes(nameSearched);
-        });
-    }
+                let contactName = contact.name.toLowerCase();
+                contact.visible = contactName.includes(nameSearched);
+            });
+        },
 
     },
 }).mount('#app');
