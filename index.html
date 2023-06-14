@@ -66,19 +66,19 @@
             </div>
         </div>
         <!-- sezione DESTRA per la chat -->
-        <div class="col message-section">
+        <div class="col message-section" v-if="activeContact !== null">
             <!-- contatto della chat -->
             <div class="col-12 my-avatar ps-2 py-1">
                 <div class="col-11 col-md avatar-profile d-flex align-items-start">
                   <img :src="contacts[activeContact].avatar" alt="" class="me-3">
-                  <div class="flex-column">
+                <div class="flex-column">
                     <span>
                       {{contacts[activeContact].name}}
                     </span>
                     <span>
                       <div class="accesso-chat">Ultimo accesso oggi alle 12:00</div>
                     </span>
-                  </div>
+                </div>
                 </div>
                 <!-- icone contatto -->
                 <div class="col-4 d-flex justify-content-md-end me-4 chat-contact">
@@ -90,29 +90,34 @@
             <!-- sezione messaggi -->
             <div class="chat-section">
                 <div v-for="(message, index) in contacts[activeContact].messages" class="col-12 d-flex msg" :class="contacts[activeContact].messages[index].status === 'received' ? '': 'justify-content-end'">
-                    <div :class="contacts[activeContact].messages[index].status === 'received' ? 'received-msg':'sent-msg'">
-                        <span class="text" >
-                            {{contacts[activeContact].messages[index].message}}
-                        </span>
-                        <span class="data-msg">
-                            {{contacts[activeContact].messages[index].date.slice(10,16)}}
-                        </span>
-                        <i class="hover fas fa-angle-down dropdown-arrow" data-toggle="dropdown" @click="dropDown(index)"></i>
-                        <div class="dropdown-menu" :class="contacts[activeContact].messages[index].dropdown ? 'show' : ''" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Info messaggio</a>
-                            <a class="dropdown-item" href="#" @click="deleteMessage(index)">Cancella il messaggio</a>
-                        </div>
+                  <div :class="contacts[activeContact].messages[index].status === 'received' ? 'received-msg':'sent-msg'">
+                    <span class="text" >
+                        {{ contacts[activeContact].messages[index].message }}
+                    </span>
+                    <span class="data-msg">
+                        {{ contacts[activeContact].messages[index].date.slice(10,16) }}
+                    </span>
+                    <i class="hover fas fa-angle-down dropdown-arrow" data-toggle="dropdown" @click="dropDown(index)"></i>
+                    <div class="dropdown-menu" :class="contacts[activeContact].messages[index].dropdown ? 'show' : ''" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="#">Info messaggio</a>
+                      <a class="dropdown-item" href="#" @click="deleteMessage(index)">Cancella il messaggio</a>
                     </div>
+                  </div>
                 </div>
-                
             </div>
             <!-- input messaggio -->
-            <div class="input-message d-flex  justify-content-between align-items-center pt-2">
+            <div class="input-message d-flex justify-content-between align-items-center pt-2">
                 <i class="fa-regular fa-face-smile ms-2" style="color: #6A7171"></i>
-                <input  @keyup.enter="newMessage" v-model="new_msg" type="text" placeholder="scrivi un messaggio" class="form-control py-1 ps-2 rounded border col mx-2">
+                <input @keyup.enter="newMessage" v-model="new_msg" type="text" placeholder="scrivi un messaggio" class="form-control py-1 ps-2 rounded border col mx-2">
                 <i class="fas fa-microphone col-auto me-2" style="color: #6A7171"></i>
             </div>
         </div>
+        <!-- messaggio di benvenuto -->
+        <div class="col message-section" v-else>
+            <div class="col-12 welcome-message">
+                <img src="https://cdn.shopify.com/s/files/1/0652/6307/5592/products/PERSONALIZZATO_WELCOME.png?v=1675883338" alt="trollata di benvenuto">
+            </div>
+        </div>  
     </div>
 </body>
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>

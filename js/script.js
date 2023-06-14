@@ -190,7 +190,7 @@ createApp({
             
             
             
-            activeContact : 0,
+            activeContact : null,
             msg_date:'',
             new_msg:'',
             response_obj: '',
