@@ -172,7 +172,8 @@ i, input, .avatar-profile{
     position: absolute;
     bottom: 0;
     width: 100%;
-    padding: 4px 0;
+    padding: 12px 10px;
+    border-left: 2px solid rgb(218, 218, 218);
 }
 
 .dropdown-arrow{

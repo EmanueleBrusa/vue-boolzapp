@@ -188,14 +188,13 @@ createApp({
                 }
             ],
             
-            
-            
             activeContact : null,
             msg_date:'',
             new_msg:'',
             response_obj: '',
             searched_name:'',
-        }
+            isRecording: false,
+        };
         
     }, 
     
@@ -210,23 +209,31 @@ createApp({
         //funzione per inviare un nuovo messaggio e setTimeout per risposta automatica
         newMessage() {
             if (this.new_msg.trim() !== '') {
-              let obj = {
-                date: '',
-                message: this.new_msg,
-                status: 'sent'
-              };
-          
-              this.contacts[this.activeContact].messages.push(obj);
-              this.new_msg = '';
-          
-              setTimeout(() => {
-                obj = {
-                  date: '',
-                  message: 'ok',
-                  status: 'received'
+                // Inizio registrazione
+                if (!this.isRecording) {
+                    this.isRecording = true;
+                    return;
+                }
+              
+                // Fine registrazione
+                let obj = {
+                    date: '',
+                    message: this.new_msg,
+                    status: 'sent',
                 };
+          
                 this.contacts[this.activeContact].messages.push(obj);
-              }, 1000);
+                this.new_msg = '';
+          
+                setTimeout(() => {
+                    obj = {
+                        date: '',
+                        message: 'ok',
+                        status: 'received',
+                    };
+                    this.contacts[this.activeContact].messages.push(obj);
+                }, 1000);
+                this.isRecording = false;
             }
         },
 
